@@ -13,6 +13,7 @@ import * as auth from '../utils/auth';
 import api from '../utils/api';
 
 function App() {
+  const [popup, setPopup] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -94,10 +95,45 @@ function App() {
     }
   };
 
+  const handleCardLike = (card) => {  
+    api.changeLikeCardStatus(card._id, !card.isLiked)  
+      .then((newCard) => {  
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));  
+      })  
+      .catch((err) => console.log(err));  
+  };
+
+  const handleCardDelete = (cardId) => {  
+    // Implementar la lógica para eliminar una card  
+    api.deleteCard(cardId)  
+      .then(() => {  
+        setCards((state) => state.filter((c) => c._id !== cardId));  
+      })  
+      .catch((err) => console.log(err));  
+  };  
+  
+  const handleAddPlaceSubmit = (cardData) => {  
+    // Implementar la lógica para agregar una nueva card  
+    api.addCard(cardData)  
+      .then((newCard) => {  
+        setCards([newCard, ...cards]);  
+        handleClosePopup();  
+      })  
+      .catch((err) => console.log(err));  
+  };  
+
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
     navigate('/signin');
+  };
+
+  const handleOpenPopup = (popupConfig) => {  
+    setPopup(popupConfig);  
+  };
+
+  const handleClosePopup = () => {  
+    setPopup(null);  
   };
 
   const closeAllPopups = () => {
@@ -115,13 +151,21 @@ function App() {
           />
           
           <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <Main cards={cards} />
-                </ProtectedRoute>
-              }
+            <Route  
+              path="/"  
+              element={  
+                <ProtectedRoute loggedIn={loggedIn}>  
+                  <Main   
+                    cards={cards}  
+                    onOpenPopup={handleOpenPopup}  
+                    onClosePopup={handleClosePopup}  
+                    popup={popup}  
+                    onCardLike={handleCardLike}  
+                    onCardDelete={handleCardDelete}  
+                    handleAddPlaceSubmit={handleAddPlaceSubmit}  
+                  />  
+                </ProtectedRoute>  
+              }  
             />
             <Route path="/signup" element={<Register onRegister={handleRegister} />} />
             <Route path="/signin" element={<Login onLogin={handleLogin} />} />
