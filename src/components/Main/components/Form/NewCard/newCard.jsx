@@ -16,7 +16,7 @@ export default function NewCard({ handleAddPlaceSubmit }) {
     try {  
       new URL(url);  
       return true;  
-    } catch (error) {  
+    } catch {  
       return false;  
     }  
   };

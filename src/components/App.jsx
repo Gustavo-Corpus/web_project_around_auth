@@ -1,4 +1,3 @@
-// src/components/App.jsx
 import { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Header from './Header/header';
@@ -44,7 +43,7 @@ function App() {
           localStorage.removeItem('jwt');
         });
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -68,7 +67,7 @@ function App() {
         setLoggedIn(true);
         navigate('/');
       }
-    } catch (err) {
+    } catch {
       setTooltipStatus({
         isSuccess: false,
         message: "Error al iniciar sesión"
@@ -85,7 +84,7 @@ function App() {
         message: "¡Registro exitoso!"
       });
       navigate('/signin');
-    } catch (err) {
+    } catch {
       setTooltipStatus({
         isSuccess: false,
         message: "Error al registrarse"
@@ -104,7 +103,6 @@ function App() {
   };
 
   const handleCardDelete = (cardId) => {  
-    // Implementar la lógica para eliminar una card  
     api.deleteCard(cardId)  
       .then(() => {  
         setCards((state) => state.filter((c) => c._id !== cardId));  
@@ -113,7 +111,6 @@ function App() {
   };  
   
   const handleAddPlaceSubmit = (cardData) => {  
-    // Implementar la lógica para agregar una nueva card  
     api.addCard(cardData)  
       .then((newCard) => {  
         setCards([newCard, ...cards]);  

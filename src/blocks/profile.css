@@ -129,6 +129,11 @@
     justify-items: center;
     margin-bottom: 11.25vw;
   }
+  .profile__avatar-container {
+  width: auto;
+  height: auto;
+  border-radius: 0%;
+  }
   .profile__avatar {
     width: 33.33vw;
     height: 33.33vw;

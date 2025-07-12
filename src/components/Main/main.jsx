@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import EditButton from "../../images/Edit_button.svg";
 import Avatar from "../../images/avatar.jpg";  
 import Popup from "./components/Popup/popup";
@@ -10,7 +10,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 export default function Main({ 
   onOpenPopup,   
-  onClosePopup,   
+  onClosePopup, 
   popup,     
   cards,     
   onCardLike,     
@@ -44,9 +44,13 @@ export default function Main({
             alt="Boton para editar el perfil"
             className="profile__edit-icon"
             type="button"
-            onClick={() => onOpenPopup({  
-              title: "Editar perfil",  
-              children: <EditProfile />  
+            onClick={() => onOpenPopup({    
+              title: "Editar perfil",    
+              children: <EditProfile   
+                isOpen={true}  
+                onClose={onClosePopup}  
+                onUpdateUser={onUpdateUser}
+              />    
             })}
           />
         </button>

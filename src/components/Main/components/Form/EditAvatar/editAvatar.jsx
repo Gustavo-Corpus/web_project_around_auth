@@ -10,7 +10,7 @@ export default function EditAvatar() {
     try {
       new URL(url);
       return true;
-    } catch (error) {
+    } catch {
       return false;
     }
   };

@@ -1,23 +1,20 @@
-// src/utils/api.js
-class Api {
-  constructor({ baseUrl, headers }) {
-    this._baseUrl = baseUrl;
-    this._headers = headers;
-  }
-
-  _getHeaders() {
-    // Usamos el token fijo para la API de Around
-    return {
-      'Content-Type': 'application/json',
-      'Authorization': '002abf4d-3eb5-4d3d-b6e5-f294e40cd739' // Tu token personal de los sprints anteriores
-    };
-  }
-
-  _checkResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
+class Api {  
+  constructor({ baseUrl }) {  
+    this._baseUrl = baseUrl;  
+  }  
+  
+  _getHeaders() {  
+    return {  
+      'Content-Type': 'application/json',  
+      'Authorization': '002abf4d-3eb5-4d3d-b6e5-f294e40cd739'
+    };  
+  }  
+  
+  _checkResponse(res) {  
+    if (res.ok) {  
+      return res.json();  
+    }  
+    return Promise.reject(`Error: ${res.status}`);  
   }
 
   getUserInfo() {
