@@ -1,3 +1,4 @@
+
 function Card({ card, handleOpenPopup, onCardLike, onCardDelete }) {
 
   function handleLikeClick() {  
@@ -20,13 +21,9 @@ function Card({ card, handleOpenPopup, onCardLike, onCardDelete }) {
         src={card.link}   
         alt={card.name}   
         onClick={() => handleOpenPopup({  
-          children: (  
-            <>  
-              <img src={card.link} alt={card.name} className="popup__image" />  
-              <h3 className="popup__description">{card.name}</h3>  
-            </>  
-          )  
-        })}  
+          type: 'image',  
+          card: card  
+        })}
       />  
       <div className="elements__item-content">  
         <h2 className="elements__item-title">{card.name}</h2>  

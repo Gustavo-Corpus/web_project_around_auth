@@ -1,10 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { CurrentUserContext } from '../../../../../contexts/CurrentUserContext';
+import React, { useState, useEffect } from 'react';
 
-export default function EditAvatar() {
+export default function EditAvatar({ onUpdateAvatar }) {
   const [avatarLink, setAvatarLink] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
-  const { handleUpdateAvatar } = useContext(CurrentUserContext);
 
   const isValidUrl = (url) => {
     try {
@@ -24,11 +22,11 @@ export default function EditAvatar() {
     setAvatarLink(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (event.target.checkValidity() && isFormValid) {
-      handleUpdateAvatar(avatarLink);
-    }
+  const handleSubmit = (event) => {  
+    event.preventDefault();  
+    if (isFormValid) {  
+      onUpdateAvatar(avatarLink);
+    }  
   };
 
   return (
@@ -51,7 +49,7 @@ export default function EditAvatar() {
         />
         <span className="popup__error">
           {avatarLink.trim().length === 0 ? 
-            'Por favor, introduce una URL válida' : 
+            '' : 
             !isValidUrl(avatarLink) ? 
             'Por favor, introduce una URL válida' : 
             '\u00A0'}

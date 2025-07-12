@@ -119,6 +119,34 @@ function App() {
       .catch((err) => console.log(err));  
   };  
 
+const handleUpdateUser = async (userData) => {    
+  try {  
+    const updatedUser = await api.setUserInfo(userData);
+    setCurrentUser(prevState => ({  
+      ...prevState,  
+      ...updatedUser  
+    }));    
+    handleClosePopup();    
+    console.log('Usuario actualizado exitosamente');  
+  } catch (err) {  
+    console.log('Error al actualizar usuario:', err);  
+  }  
+};
+
+const handleUpdateAvatar = async (avatarUrl) => {    
+  try {  
+    const updatedUser = await api.setUserAvatar(avatarUrl);    
+    setCurrentUser(prevState => ({  
+      ...prevState,  
+      ...updatedUser  
+    }));    
+    handleClosePopup();    
+    console.log('Avatar actualizado exitosamente');  
+  } catch (err) {  
+    console.log('Error al actualizar avatar:', err);  
+  }  
+};
+
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
@@ -160,6 +188,8 @@ function App() {
                     onCardLike={handleCardLike}  
                     onCardDelete={handleCardDelete}  
                     handleAddPlaceSubmit={handleAddPlaceSubmit}  
+                    onUpdateUser={handleUpdateUser}
+                    onUpdateAvatar={handleUpdateAvatar}
                   />  
                 </ProtectedRoute>  
               }  

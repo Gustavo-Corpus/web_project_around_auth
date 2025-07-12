@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import EditButton from "../../images/Edit_button.svg";
 import Avatar from "../../images/avatar.jpg";  
 import Popup from "./components/Popup/popup";
 import NewCard from "./components/form/NewCard/newCard";
 import EditProfile from "./components/Form/EditProfile/editProfile";
 import EditAvatar from "./components/Form/EditAvatar/editAvatar";
+import ImagePopup from "./components/ImagePopup/imagePopup";
 import Card from "./components/Card/card";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -15,9 +16,20 @@ export default function Main({
   cards,     
   onCardLike,     
   onCardDelete,    
-  handleAddPlaceSubmit
+  handleAddPlaceSubmit,
+  onUpdateUser,
+  onUpdateAvatar
 }) {
   const currentUser = useContext(CurrentUserContext);
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const handleOpenPopupWithImage = (config) => {  
+    if (config.type === 'image') {  
+      setSelectedCard(config.card);
+    } else {  
+      onOpenPopup(config);
+    }  
+  };
 
   return (
     <main className="content">
@@ -30,10 +42,14 @@ export default function Main({
           />
           <div 
             className="profile__avatar-edit"   
-            onClick={() => onOpenPopup({  
-              title: "Cambiar foto de perfil",  
-              children: <EditAvatar />  
-            })} 
+            onClick={() => onOpenPopup({    
+              title: "Cambiar foto de perfil",    
+              children: <EditAvatar   
+                isOpen={true}  
+                onClose={onClosePopup}  
+                onUpdateAvatar={onUpdateAvatar}
+              />    
+            })}
           ></div>
         </div>
         <h2 className="profile__info-title">{currentUser.name}</h2>
@@ -68,21 +84,26 @@ export default function Main({
           <Card     
             key={card._id}     
             card={card}     
-            handleOpenPopup={onOpenPopup}    
+            handleOpenPopup={handleOpenPopupWithImage}  
             onCardLike={onCardLike}    
             onCardDelete={onCardDelete}    
         />  
         ))}  
       </section>
-      {popup && (  
-        <Popup
-          isOpen={popup !== null}   
-          onClose={onClosePopup}   
-          title={popup.title}  
-        >  
-          {popup.children}  
-        </Popup>  
-      )}
+      {popup && (    
+        <Popup  
+          isOpen={popup !== null}     
+          onClose={onClosePopup}     
+          title={popup.title}    
+        >    
+          {popup.children}    
+        </Popup>    
+      )}  
+      <ImagePopup  
+        card={selectedCard}  
+        isOpen={selectedCard !== null}  
+        onClose={() => setSelectedCard(null)}  
+      />
     </main>
   );
 }

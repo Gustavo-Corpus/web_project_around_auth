@@ -1,7 +1,7 @@
 .header {
     margin: 0 auto 40px;
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);
-    background-color: #000; /* ✅ Fondo negro para todo el header */
+    background-color: #000;
 }
 
 .header__main {
@@ -66,7 +66,6 @@
     opacity: 0.6;
 }
 
-/* ✅ BOTÓN HAMBURGER */
 .header__hamburger {
     display: none;
     flex-direction: column;
@@ -93,11 +92,10 @@
     line-height: 1;
 }
 
-/* ✅ MENÚ MÓVIL - EXPANSIÓN NATURAL DEL HEADER */
 .header__mobile-menu {
     padding: 20px 0 40px 0;
     text-align: center;
-    border-bottom: 1px solid rgba(84, 84, 84, 0.7); /* ✅ Línea divisoria como en la imagen */
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
     background-color: #000;
 }
 
@@ -124,7 +122,6 @@
     opacity: 0.6;
 }
 
-/* ✅ MEDIA QUERIES */
 @media screen and (max-width: 920px) {
     .header__main {
         padding: 28px 27px 31.6px;

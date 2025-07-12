@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../../../../contexts/CurrentUserContext';
 import Popup from '../../Popup/popup';
 
-function EditProfile({ isOpen, onClose, onUpdateUser }) {
+function EditProfile({ isOpen, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -30,44 +30,37 @@ function EditProfile({ isOpen, onClose, onUpdateUser }) {
     setDescription(e.target.value);
   }
 
-  return (
-    <Popup
-      name="edit-profile"
-      title="Editar perfil"
-      isOpen={isOpen}
-      onClose={onClose}
-    >
-      <form className="popup__form" name="edit-profile" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          className="popup__input popup__input_type_name"
-          placeholder="Nombre"
-          required
-          minLength="2"
-          maxLength="40"
-          value={name || ''}
-          onChange={handleNameChange}
-        />
-        <span className="popup__error" id="name-error"></span>
-        <input
-          type="text"
-          name="description"
-          className="popup__input popup__input_type_about"
-          placeholder="Acerca de mí"
-          required
-          minLength="2"
-          maxLength="200"
-          value={description || ''}
-          onChange={handleDescriptionChange}
-        />
-        <span className="popup__error" id="description-error"></span>
-        <button type="submit" className="popup__button">
-          Guardar
-        </button>
-      </form>
-    </Popup>
-  );
+  return (  
+    <form className="popup__form" name="edit-profile" onSubmit={handleSubmit}>  
+      <input  
+        type="text"  
+        name="name"  
+        className="popup__input popup__input_type_name"  
+        placeholder="Nombre"  
+        required  
+        minLength="2"  
+        maxLength="40"  
+        value={name || ''}  
+        onChange={handleNameChange}  
+      />  
+      <span className="popup__error" id="name-error"></span>  
+      <input  
+        type="text"  
+        name="description"  
+        className="popup__input popup__input_type_about"  
+        placeholder="Acerca de mí"  
+        required  
+        minLength="2"  
+        maxLength="200"  
+        value={description || ''}  
+        onChange={handleDescriptionChange}  
+      />  
+      <span className="popup__error" id="description-error"></span>  
+      <button type="submit" className="popup__button">  
+        Guardar  
+      </button>  
+    </form>  
+  );  
 }
 
 export default EditProfile;
