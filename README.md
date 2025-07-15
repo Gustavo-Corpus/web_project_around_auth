@@ -14,14 +14,6 @@ Este proyecto es una migración de la aplicación "Around The U.S." de JavaScrip
 - Formularios con validación  
 - Interacción con popups modales  
   
-## Tecnologías y Técnicas Utilizadas  
-  
-### Lenguajes y Frameworks  
-- React  
-- JavaScript (ES6+)  
-- HTML5  
-- CSS3  
-  
 ### Herramientas de Desarrollo  
 - Vite (Build ability)  
 - Visual Studio Code  
