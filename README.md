@@ -13,7 +13,15 @@ Este proyecto es una migración de la aplicación "Around The U.S." de JavaScrip
 - Diseño totalmente responsivo  
 - Formularios con validación  
 - Interacción con popups modales  
-
+  
+## Tecnologías y Técnicas Utilizadas  
+  
+### Lenguajes y Frameworks  
+- React  
+- JavaScript (ES6+)  
+- HTML5  
+- CSS3  
+  
 ### Herramientas de Desarrollo  
 - Vite (Build ability)  
 - Visual Studio Code  
@@ -27,5 +35,11 @@ Este proyecto es una migración de la aplicación "Around The U.S." de JavaScrip
 - Metodología BEM para CSS  
 - Diseño responsivo con Media Queries  
 - Principios de diseño modular  
-
-Puedes ver el proyecto desplegado en: [Enlace a GitHub Pages](https://gustavo-corpus.github.io/web_project_around_auth/)
+  
+## Mejoras Implementadas en la Versión React  
+  
+- Componentización del código para mejor mantenibilidad  
+- Gestión de estado con React Hooks  
+- Reutilización de componentes (como el Popup)  
+- Mejor organización del código con una estructura de carpetas clara  
+- Implementación de props para comunicación entre componentes
